@@ -11,7 +11,7 @@ public class AuditService implements Audit{
 
     @Override
     public void auditWithdraw(long accountId, double amount, WithdrawState state) {
-        System.out.println("ACCOUNT ID: " + accountId + " WITHDRAWAL: " + amount);
+        System.out.println("ACCOUNT ID: " + accountId + " " +  state + " WITHDRAWAL: " + amount);
     }
 
     @Override
