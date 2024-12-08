@@ -6,14 +6,11 @@ import com.luxoft.bankapp.model.CheckingAccount;
 import com.luxoft.bankapp.model.Client;
 import com.luxoft.bankapp.service.Banking;
 import com.luxoft.bankapp.service.audit.AuditService;
-import com.luxoft.bankapp.service.audit.events.AccountEvent;
-import com.luxoft.bankapp.service.audit.events.DepositEvent;
 import com.luxoft.bankapp.service.operations.BankingOperationsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;

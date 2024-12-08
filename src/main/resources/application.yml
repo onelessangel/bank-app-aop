@@ -1,8 +1,14 @@
 spring:
   profiles:
     active: dev
+
 feed:
   filename: demo.feed
+
+audit:
+  amount:
+    deposit: 99
+    withdrawal: 99
 
 logging:
   level:
