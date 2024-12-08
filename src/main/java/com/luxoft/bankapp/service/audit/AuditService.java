@@ -1,21 +1,54 @@
 package com.luxoft.bankapp.service.audit;
 
+import com.luxoft.bankapp.service.audit.events.AccountEvent;
+import com.luxoft.bankapp.service.audit.events.BalanceEvent;
+import com.luxoft.bankapp.service.audit.events.DepositEvent;
+import com.luxoft.bankapp.service.audit.events.WithdrawEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
-public class AuditService implements Audit{
-    @Override
-    public void auditDeposit(long accountId, double amount) {
-        System.out.println("ACCOUNT ID: " + accountId + " DEPOSIT: " + amount);
+public class AuditService implements Audit {
+    private List<AccountEvent> events;
+
+    public AuditService() {
+        events = new ArrayList<>(100);
     }
 
     @Override
-    public void auditWithdraw(long accountId, double amount, WithdrawState state) {
-        System.out.println("ACCOUNT ID: " + accountId + " " +  state + " WITHDRAWAL: " + amount);
+    @EventListener
+    public void auditOperation(DepositEvent event) {
+        events.add(event);
+        System.out.println("ACCOUNT ID: " +
+                event.getAccountId() + " " +
+                event.getSource() + ": " +
+                event.getAmount());
     }
 
     @Override
-    public void auditBalance(long accountId) {
-        System.out.println("ACCOUNT ID: " + accountId + " BALANCE CHECK");
+    @EventListener
+    public void auditOperation(WithdrawEvent event) {
+        events.add(event);
+        System.out.println("ACCOUNT ID: " +
+                event.getAccountId() + " " +
+                event.getState() + " " +
+                event.getSource() + ": " +
+                event.getAmount());
+    }
+
+    @Override
+    @EventListener
+    public void auditOperation(BalanceEvent event) {
+        events.add(event);
+        System.out.println("ACCOUNT ID: " +
+                event.getAccountId() + " " +
+                event.getSource());
+    }
+
+    public List<AccountEvent> getEvents() {
+        return new ArrayList<>(events);
     }
 }
