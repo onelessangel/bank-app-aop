@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    active: dev
+feed:
+  filename: demo.feed
+
+logging:
+  level:
+    org:
+      springframework:
+        boot:
+          autoconfigure: ERROR
+---
+
+spring:
+  profiles: dev
+debug: true
+
+---
+
+spring:
+  profiles: prod
+debug: false
